@@ -1,0 +1,32 @@
+------------------------------------------
+TRAEFIK
+Ejecutar:
+    traefik -api.insecure true
+Console:
+    localhost:8080/dashboard
+
+------------------------------------------
+APLICACIONES:
+Ejecutar:
+    java -jar build/quarkus-app/quarkus-run.jar
+
+Ejecutar con un puerto distinto:
+    // Clientes
+    java -Dquarkus.http.port=9090 -jar build/quarkus-app/quarkus-run.jar
+
+    // Productos
+    java -Dquarkus.http.port=9092 -jar build/quarkus-app/quarkus-run.jar
+
+    // Ordenes
+    java -Dquarkus.http.port=8090 -jar build/quarkus-app/quarkus-run.jar
+
+------------------------------------------
+CONSUL:
+Ejecutar:
+    consul agent -dev
+
+Consola de Administracion:
+    localhost:8500
+
+Docker comopose:
+    docker-compose up

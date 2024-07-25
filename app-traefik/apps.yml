@@ -1,0 +1,49 @@
+http:
+  routers:
+    router-app-ordenes-compras:
+      entryPoints:
+        - http
+      service: service-app-ordenes-compras
+      rule: PathPrefix(`/app-ordenes-compras`)
+      middlewares:
+        - mid-ordenes-compras
+    router-app-clientes:
+      entryPoints:
+        - http
+      service: service-app-clientes
+      rule: PathPrefix(`/app-clientes`)
+      middlewares:
+        - mid-clientes
+    router-app-productos:
+      entryPoints:
+        - http
+      service: service-app-productos
+      rule: PathPrefix(`/app-productos`)
+      middlewares:
+        - mid-productos
+  services:
+    service-app-ordenes-compras:
+      loadBalancer:
+        servers:
+          - url: 'http://localhost:8090'
+    service-app-clientes:
+      loadBalancer:
+        servers:
+          - url: 'http://localhost:9090'
+    service-app-productos:
+      loadBalancer:
+        servers:
+          - url: 'http://localhost:9092'
+  middlewares:
+    mid-ordenes-compras:
+      stripPrefix:
+        prefixes:
+          - '/app-ordenes-compras'
+    mid-clientes:
+      stripPrefix:
+        prefixes:
+          - '/app-clientes'
+    mid-productos:
+      stripPrefix:
+        prefixes:
+          - '/app-productos'
